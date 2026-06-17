@@ -1,0 +1,48 @@
+{% extends "app/base.html" %}
+{% block title %}Мир Фильмов{% endblock %}
+
+{% block content %}
+<div class="row" style="margin-top: 20px;">
+    <div class="col s12 m6">
+        <h4>Каталог фильмов</h4>
+    </div>
+    <div class="col s12 m6 right-align" style="margin-top: 15px;">
+        <span class="grey-text">Сортировать по: </span>
+        <a href="?sort=rating" class="btn-small waves-effect {% if current_sort == 'rating' %}blue{% else %}grey lighten-1{% endif %}">Рейтингу</a>
+        <a href="?sort=release_date" class="btn-small waves-effect {% if current_sort == 'release_date' %}blue{% else %}grey lighten-1{% endif %}">Дате выхода</a>
+        
+        <a href="/movies/add/" class="btn-small green" style="margin-left: 10px;">
+            <i class="material-icons left">add</i>Добавить
+        </a>
+    </div>
+</div>
+
+<div class="row">
+    {% for movie in movies %}
+        <div class="col s12 m6 l4">
+            <div class="card hoverable">
+                <div class="card-image">
+                    <img src="{{ movie.poster.url }}" alt="{{ movie.title }}" style="height: 350px; object-fit: cover;">
+                    <span class="card-title" style="background: rgba(0,0,0,0.6); width: 100%;">{{ movie.title }}</span>
+                </div>
+                <div class="card-content">
+                    <p><strong>Страна:</strong> {{ movie.country }}</p>
+                    <p><strong>Дата выхода:</strong> {{ movie.release_date }}</p>
+                    <p style="margin-top: 10px;">
+                        <strong class="orange-text text-darken-2">
+                            <i class="material-icons tiny">star</i> Рейтинг: {{ movie.rating }}/5
+                        </strong>
+                    </p>
+                </div>
+                <div class="card-action">
+                    <a href="/movies/{{ movie.id }}/" class="blue-text">Подробнее</a>
+                </div>
+            </div>
+        </div>
+    {% empty %}
+        <div class="col s12 center-align">
+            <p class="grey-text flow-text">Фильмов пока нет. Добавьте первый!</p>
+        </div>
+    {% endfor %}
+</div>
+{% endblock %}

@@ -1,0 +1,15 @@
+{% extends "app/base.html" %}
+
+{% block title %}Главная - Категории новостей{% endblock %}
+
+{% block content %}
+<h4 class="header">Категории новостей</h4>
+<div class="collection z-depth-1">
+    {% for cat_id, cat_name in categories.items %}
+        <a href="/news/category/{{ cat_id }}/" class="collection-item view-list">
+            <i class="material-icons left blue-text">folder</i>
+            {{ cat_name }}
+        </a>
+    {% endfor %}
+</div>
+{% endblock %}

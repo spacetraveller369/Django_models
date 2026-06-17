@@ -1,0 +1,81 @@
+{% extends "app/base.html" %}
+
+{% block title %}Создать мероприятие{% endblock %}
+
+{% block content %}
+<div class="row">
+    <div class="col s12 m8 offset-m2">
+        <div class="card" style="padding: 20px;">
+            <h4 class="center-align blue-text text-darken-3">Создание мероприятия</h4>
+            
+            <form method="POST" id="event-form">
+                {% csrf_token %}
+                
+                <h5>Основная информация</h5>
+                <div class="input-field">
+                    {{ event_form.title.label_tag }}
+                    {{ event_form.title }}
+                </div>
+                <div class="input-field">
+                    {{ event_form.date.label_tag }}
+                    {{ event_form.date }}
+                </div>
+                
+                <div class="divider" style="margin: 30px 0;"></div>
+
+                <h5>Участники</h5>
+                
+                {{ participant_formset.management_form }}
+                
+                <div id="participant-form-list">
+                    {% for form in participant_formset %}
+                        <div class="participant-form-item input-field" style="margin-bottom: 15px;">
+                            {{ form.email.label_tag }}
+                            {{ form.email }}
+                            {{ form.email.errors }}
+                        </div>
+                    {% endfor %}
+                </div>
+
+                <button type="button" id="add-participant-btn" class="btn-small waves-effect waves-light green">
+                    <i class="material-icons left">add</i>Добавить участника
+                </button>
+
+                <div class="center-align" style="margin-top: 40px;">
+                    <button type="submit" class="btn large waves-effect waves-light blue darken-3" style="width: 100%;">
+                        Создать мероприятие
+                    </button>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>
+
+<script>
+    document.getElementById('add-participant-btn').addEventListener('click', function() {
+       
+        const formList = document.getElementById('participant-form-list');
+        const totalForms = document.getElementById('id_form-TOTAL_FORMS');
+        
+               intCurrentFormNum = parseInt(totalForms.value);
+        
+        
+        const allForms = document.getElementsByClassName('participant-form-item');
+        const newForm = allForms[0].cloneNode(true);
+        
+        
+        const input = newForm.querySelector('input');
+        input.value = '';
+        
+       
+        const idRegex = new RegExp(`form-0-`, 'g');
+        newForm.innerHTML = newForm.innerHTML.replace(idRegex, `form-${intCurrentFormNum}-`);
+        
+        
+        formList.appendChild(newForm);
+        
+        
+        totalForms.value = intCurrentFormNum + 1;
+    });
+</script>
+{% endblock %}

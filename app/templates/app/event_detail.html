@@ -1,0 +1,43 @@
+{% extends "app/base.html" %}
+
+{% block title %}Мероприятие создано{% endblock %}
+
+{% block content %}
+<div class="row">
+    <div class="col s12 m8 offset-m2">
+        <div class="card green lighten-5" style="padding: 20px; border: 1px solid #a5d6a7;">
+            <h4 class="green-text text-darken-3 center-align">
+                <i class="material-icons medium vertical-align">check_circle</i><br>
+                Мероприятие успешно создано!
+            </h4>
+        </div>
+
+        <div class="card" style="padding: 20px; margin-top: 20px;">
+            <span class="card-title grey-text text-darken-4">Детали мероприятия</span>
+            <p class="flow-text"><strong>Название:</strong> {{ event.title }}</p>
+            <p class="flow-text"><strong>Дата проведения:</strong> {{ event.date }}</p>
+            
+            <div class="divider" style="margin: 20px 0;"></div>
+            
+            <h5>Список участников (Всего: {{ event.participants|length }}):</h5>
+            {% if event.participants %}
+                <ul class="collection">
+                    {% for email in event.participants %}
+                        <li class="collection-item">
+                            <i class="material-icons left blue-text">email</i>{{ email }}
+                        </li>
+                    {% endfor %}
+                </ul>
+            {% else %}
+                <p class="grey-text">Участники не были добавлены.</p>
+            {% endif %}
+            
+            <div class="center-align" style="margin-top: 30px;">
+                <a href="/news/create-event/" class="btn waves-effect waves-light blue">
+                    Создать еще одно мероприятие
+                </a>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}

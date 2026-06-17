@@ -1,0 +1,37 @@
+{% extends "app/base.html" %}
+{% load static %}
+
+{% block title %}{{ category_name }}{% endblock %}
+
+{% block content %}
+<nav class="clean-breadcrumbs transparent z-depth-0">
+    <div class="nav-wrapper">
+        <div class="col s12">
+            <a href="/news/" class="breadcrumb blue-text text-darken-3">Главная</a>
+            <a href="#" class="breadcrumb black-text">{{ category_name }}</a>
+        </div>
+    </div>
+</nav>
+
+<h4>Новости по категории: {{ category_name }}</h4>
+
+<div class="row">
+    {% if news_list %}
+        {% for news in news_list %}
+            <div class="col s12 m6 l4">
+                <div class="card hoverable">
+                    <div class="card-image">
+                        <img src="{% static news.image %}" alt="{{ news.title }}" style="height: 200px; object-fit: cover;">
+                        <span class="card-title" style="background: rgba(0,0,0,0.5); width: 100%;">{{ news.title }}</span>
+                    </div>
+                    <div class="card-action">
+                        <a href="/news/item/{{ news.id }}/" class="blue-text text-darken-2">Читать далее</a>
+                    </div>
+                </div>
+            </div>
+        {% endfor %}
+    {% else %}
+        <p class="flow-text grey-text">В этой категории пока нет новостей.</p>
+    {% endif %}
+</div>
+{% endblock %}

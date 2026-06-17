@@ -1,0 +1,19 @@
+{% extends "app/base.html" %}
+{% block title %}Удалить фильм?{% endblock %}
+
+{% block content %}
+<div class="row" style="margin-top: 50px;">
+    <div class="col s12 m6 offset-m3">
+        <div class="card red lighten-5" style="padding: 30px; border: 1px solid #ffcdd2;">
+            <h4>Вы уверены?</h4>
+            <p class="flow-text">Вы собираетесь безвозвратно удалить фильм <strong>«{{ movie.title }}»</strong>.</p>
+            
+            <form method="POST" style="margin-top: 30px;">
+                {% csrf_token %}
+                <button type="submit" class="btn red waves-effect waves-light">Да, удалить</button>
+                <a href="/movies/{{ movie.id }}/" class="btn grey waves-effect" style="margin-left: 10px;">Отмена</a>
+            </form>
+        </div>
+    </div>
+</div>
+{% endblock %}

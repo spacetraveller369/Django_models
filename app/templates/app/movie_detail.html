@@ -1,0 +1,39 @@
+{% extends "app/base.html" %}
+{% block title %}{{ movie.title }}{% endblock %}
+
+{% block content %}
+<div class="row">
+    <div class="col s12">
+        <a href="/movies/" class="btn-flat waves-effect"><i class="material-icons left">arrow_back</i>Назад</a>
+        
+        <div class="card" style="margin-top: 20px; padding: 20px;">
+            <div class="row">
+                <div class="col s12 m4">
+                    <img src="{{ movie.poster.url }}" alt="{{ movie.title }}" class="responsive-img z-depth-1">
+                </div>
+                <div class="col s12 m8">
+                    <h2 class="blue-text text-darken-4" style="margin-top: 0;">{{ movie.title }}</h2>
+                    <p class="flow-text"><strong>Страна:</strong> {{ movie.country }}</p>
+                    <p class="flow-text"><strong>Дата релиза:</strong> {{ movie.release_date }}</p>
+                    <p class="flow-text">
+                        <strong class="orange-text text-darken-3">
+                            <i class="material-icons">star</i> Рейтинг: {{ movie.rating }} / 5
+                        </strong>
+                    </p>
+                    <div class="divider" style="margin: 20px 0;"></div>
+                    <h5>Описание:</h5>
+                    <p style="font-size: 1.2rem; line-height: 1.8rem;">{{ movie.description }}</p>
+                    
+                    <div class="divider" style="margin: 20px 0;"></div>
+                    <a href="/movies/{{ movie.id }}/edit/" class="btn orange waves-effect waves-light">
+                        <i class="material-icons left">edit</i>Изменить
+                    </a>
+                    <a href="/movies/{{ movie.id }}/delete/" class="btn red waves-effect waves-light" style="margin-left: 10px;">
+                        <i class="material-icons left">delete</i>Удалить
+                    </a>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}

@@ -1,0 +1,26 @@
+{% extends "app/base.html" %}
+{% load static %}
+
+{% block title %}{{ news.title }}{% endblock %}
+
+{% block content %}
+<div class="row">
+    <div class="col s12">
+        <a href="/news/" class="btn waves-effect waves-light blue darken-2" style="margin-bottom: 20px;">
+            <i class="material-icons left">arrow_back</i>Назад на главную
+        </a>
+        
+        <div class="card large z-depth-2" style="height: auto; padding-bottom: 20px;">
+            <div class="card-image">
+                <img src="{% static news.image %}" alt="{{ news.title }}" style="max-height: 450px; object-fit: cover;">
+            </div>
+            <div class="card-content">
+                <h3 class="blue-text text-darken-4" style="margin-top: 10px; font-size: 2.2rem;">{{ news.title }}</h3>
+                <p class="flow-text" style="font-size: 1.15rem; line-height: 1.8rem; text-align: justify;">
+                    {{ news.text }}
+                </p>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}
